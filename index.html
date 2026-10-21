@@ -3,29 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIMLOCK CỦA VĨNH</title>
+<title>🌐made by hql_2311</title>
 <style>
 :root {
-  --neon: #00d9ff;
-  --neon-rgb: 0,217,255;
-  --bg: #050d19;
-  --panel: #08172a;
-  --card: #0c2036;
-  --muted: #83a9c9;
-  --green: #00e6a0;
+  --neon: #ff2b2b;
+  --neon-rgb: 255,43,43;
+  --bg: #190505;
+  --panel: #2a0808;
+  --card: #360c0c;
+  --muted: #c99393;
+  --green: #ff3b3b;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0; min-height: 100vh; padding: 16px;
-  background: radial-gradient(ellipse at top, #0a2340 0%, #030711 65%);
-  color: #edf8ff; font-family: Inter, Arial, sans-serif;
+  background: radial-gradient(ellipse at top, #400a0a 0%, #110303 65%);
+  color: #fff0f0; font-family: Inter, Arial, sans-serif;
 }
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 .app {
   width: min(1180px, 100%); margin: auto;
   border: 1px solid var(--neon); border-radius: 18px;
-  background: rgba(4, 14, 28, .96);
+  background: rgba(28, 4, 4, .96);
   box-shadow: 0 0 30px rgba(var(--neon-rgb), .12);
   overflow: hidden;
 }
@@ -33,7 +33,7 @@ button { cursor: pointer; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 18px; padding: 22px 26px;
   border-bottom: 1px solid rgba(var(--neon-rgb), .4);
-  background: linear-gradient(110deg, #07172a, #061020);
+  background: linear-gradient(110deg, #2a0707, #200505);
 }
 .brand { display: flex; align-items: center; gap: 18px; min-width: 0; }
 .logo {
@@ -45,14 +45,14 @@ button { cursor: pointer; }
 h1 { margin: 0; font-size: clamp(23px, 4vw, 42px); letter-spacing: 1.5px; color: var(--neon); }
 .tagline { margin-top: 7px; color: var(--muted); font-size: 13px; letter-spacing: 1.5px; }
 .top-stats { display: flex; gap: 10px; }
-.mini-stat { min-width: 90px; padding: 12px; border: 1px solid #164368; border-radius: 10px; background: #07182a; }
+.mini-stat { min-width: 90px; padding: 12px; border: 1px solid #6c1616; border-radius: 10px; background: #2a0707; }
 .mini-stat small { display: block; color: var(--muted); }
 .mini-stat strong { display: block; margin-top: 5px; color: var(--green); font-size: 20px; }
 .layout { display: grid; grid-template-columns: 1fr; }
-.sidebar { padding: 18px 12px; border-right: 1px solid #143653; background: #061121; }
+.sidebar { padding: 18px 12px; border-right: 1px solid #4a1212; background: #210606; }
 .nav {
   display: block; width: 100%; padding: 13px 12px; margin-bottom: 8px;
-  color: #a7c6df; text-align: left; background: transparent;
+  color: #dfa7a7; text-align: left; background: transparent;
   border: 1px solid transparent; border-radius: 9px;
 }
 .nav:hover, .nav.active { color: var(--neon); background: rgba(var(--neon-rgb), .09); border-color: rgba(var(--neon-rgb), .45); }
@@ -60,37 +60,37 @@ h1 { margin: 0; font-size: clamp(23px, 4vw, 42px); letter-spacing: 1.5px; color:
 .content { padding: 20px; min-width: 0; }
 .dashboard { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
 .column { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-.card { padding: 16px; border: 1px solid #16476c; border-radius: 14px; background: linear-gradient(145deg, #08192d, #061221); }
+.card { padding: 16px; border: 1px solid #6c1616; border-radius: 14px; background: linear-gradient(145deg, #2d0808, #210606); }
 .card h2 { margin: 0 0 15px; font-size: 16px; color: var(--neon); letter-spacing: .6px; }
 .option {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 13px; margin-top: 9px; border: 1px solid #173b59;
-  border-radius: 10px; background: #0b1e32;
+  padding: 13px; margin-top: 9px; border: 1px solid #5a1b1b;
+  border-radius: 10px; background: #320b0b;
 }
 .option strong { display: block; font-size: 15px; }
 .option small { display: block; color: var(--muted); margin-top: 5px; line-height: 1.35; }
 .switch { position: relative; width: 48px; height: 27px; flex: 0 0 auto; }
 .switch input { opacity: 0; width: 0; height: 0; }
-.track { position: absolute; inset: 0; border-radius: 20px; background: #33485a; transition: .2s; cursor: pointer; }
+.track { position: absolute; inset: 0; border-radius: 20px; background: #5a3a3a; transition: .2s; cursor: pointer; }
 .track::before { content: ""; position: absolute; height: 19px; width: 19px; left: 4px; top: 4px; border-radius: 50%; background: white; transition: .2s; }
 .switch input:checked + .track { background: var(--neon); box-shadow: 0 0 12px rgba(var(--neon-rgb), .35); }
 .switch input:checked + .track::before { transform: translateX(21px); }
-.control { padding: 13px; margin-top: 9px; border: 1px solid #173b59; border-radius: 10px; background: #0b1e32; }
+.control { padding: 13px; margin-top: 9px; border: 1px solid #5a1b1b; border-radius: 10px; background: #320b0b; }
 .control label { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; }
 .value { color: var(--neon); font-weight: 700; }
 input[type="range"] { width: 100%; accent-color: var(--neon); margin: 14px 0 3px; }
 .range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; }
 select {
-  width: 100%; padding: 11px; margin-top: 10px; color: #edf8ff;
-  background: #071321; border: 1px solid #235274; border-radius: 8px;
+  width: 100%; padding: 11px; margin-top: 10px; color: #fff0f0;
+  background: #210707; border: 1px solid #742323; border-radius: 8px;
 }
 .swatches { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-.swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #b8d7e8; outline: 2px solid transparent; }
+.swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #e8b8b8; outline: 2px solid transparent; }
 .swatch.selected { outline-color: white; outline-offset: 3px; }
 .preview {
   min-height: 300px; display: grid; place-items: center; position: relative; overflow: hidden;
-  border: 1px solid #16476c; border-radius: 12px;
-  background-color: #040d19;
+  border: 1px solid #6c1616; border-radius: 12px;
+  background-color: #190404;
   background-image: linear-gradient(rgba(var(--neon-rgb), .08) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(var(--neon-rgb), .08) 1px, transparent 1px);
   background-size: 22px 22px;
@@ -110,21 +110,21 @@ select {
 .crosshair.circle { border: 2px solid var(--neon); border-radius: 50%; }
 .crosshair.circle::before, .crosshair.circle::after { display: none; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.stat { padding: 13px 8px; text-align: center; border: 1px solid #173b59; border-radius: 10px; background: #0b1e32; }
+.stat { padding: 13px 8px; text-align: center; border: 1px solid #5a1b1b; border-radius: 10px; background: #320b0b; }
 .stat small { display: block; color: var(--muted); }
 .stat strong { display: block; margin-top: 7px; color: var(--neon); font-size: 20px; }
 .bottom-bar { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; margin-top: 16px; }
-.status-box { padding: 15px; border: 1px solid #17496b; border-radius: 12px; background: #081a2c; }
-#status { color: #ff6f85; font-weight: 800; }
-#status.active { color: var(--green); }
+.status-box { padding: 15px; border: 1px solid #6b1b1b; border-radius: 12px; background: #2c0808; }
+#status { color: #9a7f7f; font-weight: 800; }
+#status.active { color: var(--green); text-shadow: 0 0 12px rgba(var(--neon-rgb), .7); }
 #activate {
   padding: 17px 20px; min-width: 210px; border: 1px solid var(--green);
-  border-radius: 12px; background: var(--green); color: #032016; font-weight: 800;
-  box-shadow: 0 0 18px #00e6a033;
+  border-radius: 12px; background: var(--green); color: #200303; font-weight: 800;
+  box-shadow: 0 0 18px #ff3b3b33;
 }
-#activate.active { background: #102d2a; color: var(--green); }
-.secondary { margin-top: 10px; padding: 10px 13px; border-radius: 8px; border: 1px solid #254760; background: transparent; color: #a7c6df; }
-footer { padding: 16px; border-top: 1px solid #143653; text-align: center; color: #7194b2; font-size: 12px; }
+#activate.active { background: #2d1010; color: var(--green); }
+.secondary { margin-top: 10px; padding: 10px 13px; border-radius: 8px; border: 1px solid #60251f; background: transparent; color: #dfa7a7; }
+footer { padding: 16px; border-top: 1px solid #4a1212; text-align: center; color: #b27171; font-size: 12px; }
 .hidden { display: none !important; }
 @media (max-width: 780px) {
   body { padding: 8px; }
@@ -132,7 +132,7 @@ footer { padding: 16px; border-top: 1px solid #143653; text-align: center; color
   .logo { width: 52px; height: 52px; font-size: 26px; }
   .top-stats { display: none; }
   .layout { grid-template-columns: 1fr; }
-  .sidebar { display: flex; overflow-x: auto; gap: 5px; padding: 9px; border-right: 0; border-bottom: 1px solid #143653; }
+  .sidebar { display: flex; overflow-x: auto; gap: 5px; padding: 9px; border-right: 0; border-bottom: 1px solid #4a1212; }
   .nav { width: auto; min-width: max-content; margin: 0; padding: 10px; font-size: 12px; }
   .side-sign { display: none; }
   .content { padding: 12px; }
@@ -148,7 +148,7 @@ footer { padding: 16px; border-top: 1px solid #143653; text-align: center; color
     <div class="brand">
       <div class="logo">⊙</div>
       <div>
-        <h1>AIMLOCK CỦA VĨNH</h1>
+        <h1>🌐made by hql_2311</h1>
         <div class="tagline">GAMING CONTROL CENTER · DEMO UI</div>
       </div>
     </div>
@@ -226,6 +226,7 @@ footer { padding: 16px; border-top: 1px solid #143653; text-align: center; color
               <div class="control">
                 <label for="theme">Màu neon</label>
                 <select id="theme">
+                  <option value="#ff2b2b">Blood Red</option>
                   <option value="#00d9ff">Cyber Blue</option>
                   <option value="#00ff99">Neon Green</option>
                   <option value="#bd65ff">Purple</option>
@@ -233,7 +234,8 @@ footer { padding: 16px; border-top: 1px solid #143653; text-align: center; color
                   <option value="#ffb52e">Gold</option>
                 </select>
                 <div class="swatches">
-                  <button class="swatch selected" data-color="#00d9ff" style="background:#00d9ff" aria-label="Xanh cyan"></button>
+                  <button class="swatch selected" data-color="#ff2b2b" style="background:#ff2b2b" aria-label="Đỏ"></button>
+                  <button class="swatch" data-color="#00d9ff" style="background:#00d9ff" aria-label="Xanh cyan"></button>
                   <button class="swatch" data-color="#00ff99" style="background:#00ff99" aria-label="Xanh lá"></button>
                   <button class="swatch" data-color="#bd65ff" style="background:#bd65ff" aria-label="Tím"></button>
                   <button class="swatch" data-color="#ff4f91" style="background:#ff4f91" aria-label="Hồng"></button>
@@ -261,7 +263,7 @@ footer { padding: 16px; border-top: 1px solid #143653; text-align: center; color
       </section>
 </main>
   </div>
-  <footer>AIMLOCK CỦA VĨNH · GIAO DIỆN DEMO GAMING · MADE BY VĨNH</footer>
+  <footer>🌐made by hql_2311 · GIAO DIỆN DEMO GAMING</footer>
 </div>
 
 <script>
@@ -351,7 +353,7 @@ $("reset").addEventListener("click", () => {
   $("crossSize").value = 22;
   $("crossType").value = "cross";
   $("brightness").value = 100;
-  setTheme("#00d9ff");
+  setTheme("#ff2b2b");
   active = false;
   $("status").textContent = "INACTIVE";
   $("status").classList.remove("active");
