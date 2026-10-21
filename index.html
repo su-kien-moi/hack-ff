@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIMLOCK CỦA VĨNH</title>
+<style>
+:root {
+  --neon: #00d9ff;
+  --neon-rgb: 0,217,255;
+  --bg: #050d19;
+  --panel: #08172a;
+  --card: #0c2036;
+  --muted: #83a9c9;
+  --green: #00e6a0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; padding: 16px;
+  background: radial-gradient(ellipse at top, #0a2340 0%, #030711 65%);
+  color: #edf8ff; font-family: Inter, Arial, sans-serif;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.app {
+  width: min(1180px, 100%); margin: auto;
+  border: 1px solid var(--neon); border-radius: 18px;
+  background: rgba(4, 14, 28, .96);
+  box-shadow: 0 0 30px rgba(var(--neon-rgb), .12);
+  overflow: hidden;
+}
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 18px; padding: 22px 26px;
+  border-bottom: 1px solid rgba(var(--neon-rgb), .4);
+  background: linear-gradient(110deg, #07172a, #061020);
+}
+.brand { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.logo {
+  width: 72px; height: 72px; flex: 0 0 auto; border: 3px solid var(--neon);
+  border-radius: 50%; display: grid; place-items: center;
+  color: var(--neon); font-size: 36px; text-shadow: 0 0 16px var(--neon);
+  box-shadow: inset 0 0 18px rgba(var(--neon-rgb), .12), 0 0 16px rgba(var(--neon-rgb), .15);
+}
+h1 { margin: 0; font-size: clamp(23px, 4vw, 42px); letter-spacing: 1.5px; color: var(--neon); }
+.tagline { margin-top: 7px; color: var(--muted); font-size: 13px; letter-spacing: 1.5px; }
+.top-stats { display: flex; gap: 10px; }
+.mini-stat { min-width: 90px; padding: 12px; border: 1px solid #164368; border-radius: 10px; background: #07182a; }
+.mini-stat small { display: block; color: var(--muted); }
+.mini-stat strong { display: block; margin-top: 5px; color: var(--green); font-size: 20px; }
+.layout { display: grid; grid-template-columns: 1fr; }
+.sidebar { padding: 18px 12px; border-right: 1px solid #143653; background: #061121; }
+.nav {
+  display: block; width: 100%; padding: 13px 12px; margin-bottom: 8px;
+  color: #a7c6df; text-align: left; background: transparent;
+  border: 1px solid transparent; border-radius: 9px;
+}
+.nav:hover, .nav.active { color: var(--neon); background: rgba(var(--neon-rgb), .09); border-color: rgba(var(--neon-rgb), .45); }
+.side-sign { margin-top: 80px; color: var(--neon); text-align: center; font-size: 25px; font-style: italic; }
+.content { padding: 20px; min-width: 0; }
+.dashboard { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
+.column { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.card { padding: 16px; border: 1px solid #16476c; border-radius: 14px; background: linear-gradient(145deg, #08192d, #061221); }
+.card h2 { margin: 0 0 15px; font-size: 16px; color: var(--neon); letter-spacing: .6px; }
+.option {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 13px; margin-top: 9px; border: 1px solid #173b59;
+  border-radius: 10px; background: #0b1e32;
+}
+.option strong { display: block; font-size: 15px; }
+.option small { display: block; color: var(--muted); margin-top: 5px; line-height: 1.35; }
+.switch { position: relative; width: 48px; height: 27px; flex: 0 0 auto; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.track { position: absolute; inset: 0; border-radius: 20px; background: #33485a; transition: .2s; cursor: pointer; }
+.track::before { content: ""; position: absolute; height: 19px; width: 19px; left: 4px; top: 4px; border-radius: 50%; background: white; transition: .2s; }
+.switch input:checked + .track { background: var(--neon); box-shadow: 0 0 12px rgba(var(--neon-rgb), .35); }
+.switch input:checked + .track::before { transform: translateX(21px); }
+.control { padding: 13px; margin-top: 9px; border: 1px solid #173b59; border-radius: 10px; background: #0b1e32; }
+.control label { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; }
+.value { color: var(--neon); font-weight: 700; }
+input[type="range"] { width: 100%; accent-color: var(--neon); margin: 14px 0 3px; }
+.range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; }
+select {
+  width: 100%; padding: 11px; margin-top: 10px; color: #edf8ff;
+  background: #071321; border: 1px solid #235274; border-radius: 8px;
+}
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #b8d7e8; outline: 2px solid transparent; }
+.swatch.selected { outline-color: white; outline-offset: 3px; }
+.preview {
+  min-height: 300px; display: grid; place-items: center; position: relative; overflow: hidden;
+  border: 1px solid #16476c; border-radius: 12px;
+  background-color: #040d19;
+  background-image: linear-gradient(rgba(var(--neon-rgb), .08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(var(--neon-rgb), .08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.preview-label { position: absolute; top: 12px; left: 12px; color: var(--neon); font-size: 12px; }
+.preview-label.right { left: auto; right: 12px; }
+.fov {
+  width: 140px; height: 140px; border: 2px solid var(--neon); border-radius: 50%;
+  display: grid; place-items: center; box-shadow: 0 0 20px rgba(var(--neon-rgb), .22);
+}
+.crosshair { width: 22px; height: 22px; position: relative; }
+.crosshair::before, .crosshair::after { content: ""; position: absolute; background: var(--neon); border-radius: 2px; }
+.crosshair::before { width: 2px; height: 100%; left: calc(50% - 1px); }
+.crosshair::after { height: 2px; width: 100%; top: calc(50% - 1px); }
+.crosshair.dot::before, .crosshair.dot::after { display: none; }
+.crosshair.dot { width: 7px; height: 7px; background: var(--neon); border-radius: 50%; }
+.crosshair.circle { border: 2px solid var(--neon); border-radius: 50%; }
+.crosshair.circle::before, .crosshair.circle::after { display: none; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat { padding: 13px 8px; text-align: center; border: 1px solid #173b59; border-radius: 10px; background: #0b1e32; }
+.stat small { display: block; color: var(--muted); }
+.stat strong { display: block; margin-top: 7px; color: var(--neon); font-size: 20px; }
+.bottom-bar { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; margin-top: 16px; }
+.status-box { padding: 15px; border: 1px solid #17496b; border-radius: 12px; background: #081a2c; }
+#status { color: #ff6f85; font-weight: 800; }
+#status.active { color: var(--green); }
+#activate {
+  padding: 17px 20px; min-width: 210px; border: 1px solid var(--green);
+  border-radius: 12px; background: var(--green); color: #032016; font-weight: 800;
+  box-shadow: 0 0 18px #00e6a033;
+}
+#activate.active { background: #102d2a; color: var(--green); }
+.secondary { margin-top: 10px; padding: 10px 13px; border-radius: 8px; border: 1px solid #254760; background: transparent; color: #a7c6df; }
+footer { padding: 16px; border-top: 1px solid #143653; text-align: center; color: #7194b2; font-size: 12px; }
+.hidden { display: none !important; }
+@media (max-width: 780px) {
+  body { padding: 8px; }
+  .topbar { padding: 16px; }
+  .logo { width: 52px; height: 52px; font-size: 26px; }
+  .top-stats { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: flex; overflow-x: auto; gap: 5px; padding: 9px; border-right: 0; border-bottom: 1px solid #143653; }
+  .nav { width: auto; min-width: max-content; margin: 0; padding: 10px; font-size: 12px; }
+  .side-sign { display: none; }
+  .content { padding: 12px; }
+  .dashboard { grid-template-columns: 1fr; }
+  .bottom-bar { grid-template-columns: 1fr; }
+  #activate { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">⊙</div>
+      <div>
+        <h1>AIMLOCK CỦA VĨNH</h1>
+        <div class="tagline">GAMING CONTROL CENTER · DEMO UI</div>
+      </div>
+    </div>
+    <div class="top-stats">
+      <div class="mini-stat"><small>FPS (demo)</small><strong>120</strong></div>
+      <div class="mini-stat"><small>Ping (demo)</small><strong>23 ms</strong></div>
+    </div>
+  </header>
+
+  <div class="layout">
+<main class="content">
+      <section id="overview" class="tab-panel">
+        <div class="dashboard">
+          <div class="column">
+            <section class="card">
+              <h2>01 / CHỨC NĂNG CHÍNH</h2>
+              <div class="option">
+                <div><strong>No Recoil</strong></div>
+                <label class="switch"><input id="recoil" type="checkbox" checked aria-label="No Recoil"><span class="track"></span></label>
+              </div>
+              <div class="option">
+                <div><strong>FOV Circle</strong><small>Hiện vòng tròn trong bản xem trước</small></div>
+                <label class="switch"><input id="fovToggle" type="checkbox" checked aria-label="FOV Circle"><span class="track"></span></label>
+              </div>
+              <div class="option">
+                <div><strong>Crosshair</strong><small>Hiện tâm ngắm xem trước</small></div>
+                <label class="switch"><input id="crossToggle" type="checkbox" checked aria-label="Crosshair"><span class="track"></span></label>
+              </div>
+              <div class="option">
+                <div><strong>Glow Effect</strong><small>Hiệu ứng phát sáng neon</small></div>
+                <label class="switch"><input id="glowToggle" type="checkbox" checked aria-label="Glow Effect"><span class="track"></span></label>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2>05 / BẢN XEM TRƯỚC</h2>
+              <div class="preview" id="preview">
+                <div class="preview-label" id="previewFovLabel">FOV: 70 px</div>
+                <div class="preview-label right" id="previewCrossLabel">TÂM: 22 px</div>
+                <div class="fov" id="fovCircle"><div class="crosshair" id="crosshair"></div></div>
+              </div>
+              <small style="color:var(--muted)">Bản xem trước minh họa — không điều khiển trò chơi.</small>
+            </section>
+          </div>
+
+          <div class="column">
+            <section class="card">
+              <h2>02 / TÙY CHỈNH FOV</h2>
+              <div class="control">
+                <label for="fovSize">Bán kính vòng ngắm <span class="value" id="fovValue">70 px</span></label>
+                <input type="range" id="fovSize" min="30" max="100" value="70">
+                <div class="range-labels"><span>30 px</span><span>100 px</span></div>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2>03 / TÙY CHỈNH TÂM NGẮM</h2>
+              <div class="control">
+                <label for="crossSize">Kích thước tâm <span class="value" id="crossValue">22 px</span></label>
+                <input type="range" id="crossSize" min="10" max="50" value="22">
+                <div class="range-labels"><span>10 px</span><span>50 px</span></div>
+              </div>
+              <div class="control">
+                <label for="crossType">Loại tâm ngắm</label>
+                <select id="crossType">
+                  <option value="cross">Tâm chữ thập</option>
+                  <option value="dot">Chấm tròn</option>
+                  <option value="circle">Vòng tròn nhỏ</option>
+                </select>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2>04 / GIAO DIỆN</h2>
+              <div class="control">
+                <label for="theme">Màu neon</label>
+                <select id="theme">
+                  <option value="#00d9ff">Cyber Blue</option>
+                  <option value="#00ff99">Neon Green</option>
+                  <option value="#bd65ff">Purple</option>
+                  <option value="#ff4f91">Pink</option>
+                  <option value="#ffb52e">Gold</option>
+                </select>
+                <div class="swatches">
+                  <button class="swatch selected" data-color="#00d9ff" style="background:#00d9ff" aria-label="Xanh cyan"></button>
+                  <button class="swatch" data-color="#00ff99" style="background:#00ff99" aria-label="Xanh lá"></button>
+                  <button class="swatch" data-color="#bd65ff" style="background:#bd65ff" aria-label="Tím"></button>
+                  <button class="swatch" data-color="#ff4f91" style="background:#ff4f91" aria-label="Hồng"></button>
+                  <button class="swatch" data-color="#ffb52e" style="background:#ffb52e" aria-label="Vàng"></button>
+                </div>
+              </div>
+              <div class="control">
+                <label for="brightness">Độ sáng giao diện <span class="value" id="brightValue">100%</span></label>
+                <input type="range" id="brightness" min="50" max="150" value="100">
+                <div class="range-labels"><span>50%</span><span>150%</span></div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="bottom-bar">
+          <div class="status-box">
+            <strong>TRẠNG THÁI HỆ THỐNG: </strong>
+            <span id="status">INACTIVE</span>
+            <div id="activeSummary" style="color:var(--muted);font-size:12px;margin-top:8px">Bản demo đang chờ kích hoạt.</div>
+          </div>
+          <button id="activate">⏻ KÍCH HOẠT HỆ THỐNG</button>
+        </div>
+        <button class="secondary" id="reset">↺ Khôi phục cài đặt mặc định</button>
+      </section>
+</main>
+  </div>
+  <footer>AIMLOCK CỦA VĨNH · GIAO DIỆN DEMO GAMING · MADE BY VĨNH</footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const root = document.documentElement;
+
+function hexToRgb(hex) {
+  const value = hex.replace("#", "");
+  return [
+    parseInt(value.slice(0, 2), 16),
+    parseInt(value.slice(2, 4), 16),
+    parseInt(value.slice(4, 6), 16)
+  ].join(",");
+}
+
+function setTheme(color) {
+  root.style.setProperty("--neon", color);
+  root.style.setProperty("--neon-rgb", hexToRgb(color));
+  $("theme").value = color;
+  document.querySelectorAll(".swatch").forEach(button => {
+    button.classList.toggle("selected", button.dataset.color === color);
+  });
+}
+
+function updateFov() {
+  const value = Number($("fovSize").value);
+  $("fovValue").textContent = value + " px";
+  $("previewFovLabel").textContent = "FOV: " + value + " px";
+  // Chuyển giá trị 30–100 thành đường kính xem trước 80–210 px.
+  const diameter = 80 + (value - 30) * (130 / 70);
+  $("fovCircle").style.width = diameter + "px";
+  $("fovCircle").style.height = diameter + "px";
+}
+
+function updateCrosshair() {
+  const size = Number($("crossSize").value);
+  $("crossValue").textContent = size + " px";
+  $("previewCrossLabel").textContent = "TÂM: " + size + " px";
+  $("crosshair").style.width = size + "px";
+  $("crosshair").style.height = size + "px";
+  $("crosshair").className = "crosshair " + $("crossType").value;
+}
+
+function updateBrightness() {
+  const value = Number($("brightness").value);
+  $("brightValue").textContent = value + "%";
+  $("preview").style.filter = "brightness(" + value / 100 + ")";
+}
+
+function updateToggles() {
+  $("fovCircle").classList.toggle("hidden", !$("fovToggle").checked);
+  $("crosshair").classList.toggle("hidden", !$("crossToggle").checked);
+  $("fovCircle").style.boxShadow = $("glowToggle").checked
+    ? "0 0 20px rgba(" + hexToRgb($("theme").value) + ", .28)"
+    : "none";
+}
+
+$("fovSize").addEventListener("input", updateFov);
+$("crossSize").addEventListener("input", updateCrosshair);
+$("crossType").addEventListener("change", updateCrosshair);
+$("brightness").addEventListener("input", updateBrightness);
+["fovToggle", "crossToggle", "glowToggle"].forEach(id => $(id).addEventListener("change", updateToggles));
+$("theme").addEventListener("change", () => { setTheme($("theme").value); updateToggles(); });
+document.querySelectorAll(".swatch").forEach(button => {
+  button.addEventListener("click", () => { setTheme(button.dataset.color); updateToggles(); });
+});
+
+let active = false;
+$("activate").addEventListener("click", () => {
+  active = !active;
+  $("status").textContent = active ? "ACTIVE" : "INACTIVE";
+  $("status").classList.toggle("active", active);
+  $("activate").classList.toggle("active", active);
+  $("activate").textContent = active ? "⏻ TẮT HỆ THỐNG" : "⏻ KÍCH HOẠT HỆ THỐNG";
+  $("activeSummary").textContent = active
+    ? "Giao diện demo đã được kích hoạt."
+    : "Bản demo đang chờ kích hoạt.";
+});
+
+
+$("reset").addEventListener("click", () => {
+  $("recoil").checked = true;
+  $("fovToggle").checked = true;
+  $("crossToggle").checked = true;
+  $("glowToggle").checked = true;
+  $("fovSize").value = 70;
+  $("crossSize").value = 22;
+  $("crossType").value = "cross";
+  $("brightness").value = 100;
+  setTheme("#00d9ff");
+  active = false;
+  $("status").textContent = "INACTIVE";
+  $("status").classList.remove("active");
+  $("activate").classList.remove("active");
+  $("activate").textContent = "⏻ KÍCH HOẠT HỆ THỐNG";
+  $("activeSummary").textContent = "Bản demo đang chờ kích hoạt.";
+  updateFov(); updateCrosshair(); updateBrightness(); updateToggles();
+});
+
+updateFov();
+updateCrosshair();
+updateBrightness();
+updateToggles();
+</script>
+</body>
+</html>
